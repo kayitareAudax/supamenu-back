@@ -1,6 +1,8 @@
 const router = require("express").Router();
 const { findUser, createUser, getUsers } = require('../../services/user.service')
-const { check, validationResult } = require("express-validator")
+// const auth=require("../../middleware/auth.middleware")
+const { check, validationResult } = require("express-validator");
+const verifyToken = require("../../middleware/auth.middleware");
 router.post('/login', check("email", "invalid email is provided").exists().isEmail(),
     check("password", "invalid password").exists().isLength({ min: 6, max: 20 }), async (req, res, next) => {
         const {email,password}=req.body;
@@ -40,5 +42,8 @@ router.post('/signup',
         }
         const newUser = await createUser(req.body);
         return res.json({ success: true, message: newUser.generateToken() });
+    })
+    router.get('/dashboard',verifyToken,async(req,res,next)=>{
+        res.send("hey there")
     })
 module.exports = router;

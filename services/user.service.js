@@ -1,4 +1,4 @@
-const {createUser,getUsers,updateUser,deleteUser,findUserByEmail} = require("../repositories/user.repo");
+const {createUser,getUsers,updateUser,deleteUser,findUserByEmail,getUser} = require("../repositories/user.repo");
 
 class UserService{
     static async createUser(user){
@@ -9,6 +9,9 @@ class UserService{
     }
     static async getUsers(){
         return  getUsers();
+    }
+    static async getUser(id){
+        return getUser(id);
     }
 }
 module.exports=UserService;

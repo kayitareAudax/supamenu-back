@@ -17,5 +17,8 @@ class UserRepo{
     static async updateUser(id,data){
         return User.findByIdAndUpdate(id,data);
     }
+    static async getUser(id){
+        return User.findById(id);
+    }
 }
 module.exports=UserRepo;
