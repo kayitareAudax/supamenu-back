@@ -43,9 +43,12 @@ userSchema.pre('save', function preSave(next) {
   }
   return next();
 });
-userSchema.methods.generateToken=()=>{
-    return jwt.sign({id:this._id},process.env.JWT_SECRET,{expiresIn: 1 * 24 * 60 * 60
-    })
+userSchema.methods.generateToken = function () {
+  return jwt.sign({
+      id: this._id
+  }, process.env.JWT_SECRET, {
+      expiresIn: 1 * 24 * 60 * 60
+  });
 }
 userSchema.methods.comparePassword = function comparePassword(candidatePassword) {
     return bcrypt.compare(candidatePassword, this.password)

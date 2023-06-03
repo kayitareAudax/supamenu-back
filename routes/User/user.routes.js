@@ -14,7 +14,6 @@ router.post('/login', check("email", "invalid email is provided").exists().isEma
         if(!user){
             return res.json({success:false,message:"invalid credentials"});
         }
-        console.log(user);
         //compare password;
         const passwordValid=await user.comparePassword(password);
         if(!passwordValid){
@@ -44,6 +43,6 @@ router.post('/signup',
         return res.json({ success: true, message: newUser.generateToken() });
     })
     router.get('/dashboard',verifyToken,async(req,res,next)=>{
-        res.send("hey there")
+        res.send(req.user)
     })
 module.exports = router;
