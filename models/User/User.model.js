@@ -20,7 +20,7 @@ const userSchema=new mongoose.Schema({
     role:{
         type:String,
         enum:["client","manager"],
-        default:"client"
+        default:"manager"
     }
 })
 userSchema.pre('save', function preSave(next) {

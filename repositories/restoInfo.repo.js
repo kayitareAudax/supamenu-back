@@ -1,16 +1,19 @@
 const RestoInfo=require("../models/resto/RestoInfo.model")
 class RestoInfoRepo{
     static async createRestoInfo(restoInfo){
-        await RestoInfo.create(restoInfo);
+        return RestoInfo.create(restoInfo);
     }
     static async getRestoInfo(id){
-        await RestoInfo.find(id)
+        return RestoInfo.findById(id)
     }
     static async getRestosInfo(){
-        await RestoInfo.find();
+        return RestoInfo.find();
     }
     static async deleteRestoInfo(id){
         await RestoInfo.findByIdAndDelete(id);
+    }
+    static async updateRestoInfo(id,data){
+        await RestoInfo.findByIdAndUpdate(id,data);
     }
 }
 module.exports=RestoInfoRepo;
